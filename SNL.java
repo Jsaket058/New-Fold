@@ -1,6 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
-
+import java.awt.event.*;
 class FDemo extends JFrame {
     JPDemo jp1;
 
@@ -11,7 +11,7 @@ class FDemo extends JFrame {
     }
 }
 
-class JPDemo extends JPanel {
+class JPDemo extends JPanel implements ActionListener{
     ImageIcon img1, img2, img3, img4;
     ImageIcon img5, img6, img7;
     ImageIcon img8, img9;
@@ -24,7 +24,9 @@ class JPDemo extends JPanel {
 
     JButton b1, b2, b3, b4;
     JTextField tx1, tx2, tx3;
-
+    
+    int px1=40;
+    int py1=160;
     JPDemo() {
         setBackground(Color.black);
 
@@ -95,9 +97,11 @@ class JPDemo extends JPanel {
         add(b3);
         b3.setFont(f);
         b3.setForeground(Color.red);
+        
+        b3.addActionListener(this);
 
         b4 = new JButton(img7);
-        b3.setBounds(20, 560, 150, 60);
+        b4.setBounds(20, 560, 150, 60);
         add(b4);
         b4.setFont(f);
         b4.setForeground(Color.red);
@@ -114,7 +118,7 @@ class JPDemo extends JPanel {
         g.drawImage(s1, 920, 0, this);
         g.drawImage(start, 20, 550, this);
 
-        g.drawImage(player1, 40, 620, this);
+        g.drawImage(player1, px1, py1, this);
         g.drawImage(player2, 120, 620, this);
 
         g.drawImage(player11, 10, 280, this);
@@ -122,6 +126,41 @@ class JPDemo extends JPanel {
 
         g.drawImage(dice, 10, 420, this);
         g.drawImage(dice1, 110, 430, this);
+    }
+    public void actionPerformed(ActionEvent e){
+        if(e.getSource()==b3){
+            int random=(int)Math.round(Math.random()*5+1);
+            px1=140;
+            py1=645;
+            switch(random){
+                case 1:
+                img11=new ImageIcon("dice1.png");
+                px1+=70;
+                break;
+                case 2:
+                img11=new ImageIcon("dice2.png");
+                px1+=140;
+                break;
+                case 3:
+                img11=new ImageIcon("dice3.png");
+                px1+=210;
+                break;
+                case 4:
+                img11=new ImageIcon("dice4.png");
+                px1+=280;
+                break;
+                case 5:
+                img11=new ImageIcon("dice5.png");
+                px1+=350;
+                break;
+                case 6:
+                img11=new ImageIcon("dice6.png");
+                px1+=420;
+                break;
+            }
+        dice1=img11.getImage();
+        repaint();    
+        }
     }
 }
 
